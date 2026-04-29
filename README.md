@@ -59,7 +59,7 @@ Create an assistant that helps users understand the election process, timelines,
 
 ```bash
 # 1. Clone the repository
-git clone <repo-url>
+git clone <repo-url> (url of the repo)
 cd pollux
 
 # 2. Install dependencies
