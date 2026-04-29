@@ -1,0 +1,112 @@
+@import "tailwindcss";
+@import "./styles/globals.css";
+
+@theme {
+  /* ── Map CSS variables → Tailwind v4 theme tokens ── */
+
+  /* Core palette */
+  --color-canvas:           var(--pollux-bg);
+  --color-accent:           var(--pollux-red);
+  --color-accent-hover:     var(--pollux-red-hover);
+  --color-border:           var(--pollux-border);
+  --color-text-primary:     var(--pollux-text);
+  --color-text-secondary:   var(--pollux-text-muted);
+
+  /* Material surfaces */
+  --color-surface:                    var(--surface);
+  --color-surface-dim:                var(--surface-dim);
+  --color-surface-bright:             var(--surface-bright);
+  --color-surface-container-lowest:   var(--surface-container-lowest);
+  --color-surface-container-low:      var(--surface-container-low);
+  --color-surface-container:          var(--surface-container);
+  --color-surface-container-high:     var(--surface-container-high);
+  --color-surface-container-highest:  var(--surface-container-highest);
+  --color-surface-variant:            var(--surface-variant);
+  --color-on-surface:                 var(--on-surface);
+  --color-on-surface-variant:         var(--on-surface-variant);
+
+  /* Primary / Secondary / Tertiary */
+  --color-primary:            var(--primary);
+  --color-on-primary:         var(--on-primary);
+  --color-primary-container:  var(--primary-container);
+  --color-secondary:          var(--secondary);
+  --color-tertiary:           var(--tertiary);
+
+  /* Error */
+  --color-error:              var(--error);
+  --color-error-container:    var(--error-container);
+
+  /* Outline */
+  --color-outline:            var(--outline);
+  --color-outline-variant:    var(--outline-variant);
+
+  /* Fonts */
+  --font-headline: var(--font-headline);
+  --font-body:     var(--font-body);
+  --font-label:    var(--font-label);
+
+  /* Spacing */
+  --spacing-xs: var(--space-xs);
+  --spacing-sm: var(--space-sm);
+  --spacing-md: var(--space-md);
+  --spacing-lg: var(--space-lg);
+  --spacing-xl: var(--space-xl);
+}
+
+/* ── Base resets ── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--pollux-bg);
+  color: var(--pollux-text);
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  font-weight: var(--body-weight);
+  line-height: var(--body-leading);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Material Symbols icon font ── */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-size: 24px;
+}
+
+.material-symbols-outlined.fill {
+  font-variation-settings: 'FILL' 1;
+}
+
+/* ── AI chat markdown rendering ── */
+.prose-pollux {
+  line-height: 1.7;
+  word-break: break-word;
+}
+
+.prose-pollux strong {
+  color: var(--pollux-text);
+  font-weight: 700;
+}
+
+.prose-pollux em {
+  font-style: italic;
+}
+
+.prose-pollux a {
+  color: var(--pollux-red);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-pollux a:hover {
+  opacity: 0.8;
+}
+
+.prose-pollux code {
+  background: var(--surface-container);
+  padding: 2px 6px;
+  font-size: 0.85em;
+}

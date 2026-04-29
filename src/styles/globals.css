@@ -1,0 +1,115 @@
+/* ═══════════════════════════════════════════════════════
+   POLLUX NOIR — Global Design Tokens
+   Extracted from Stitch Design System + HTML source files
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Core Palette (from HTML hardcoded values) ── */
+  --pollux-bg:          #0A0A0F;
+  --pollux-red:         #E63946;
+  --pollux-red-hover:   #c42f3a;
+  --pollux-border:      #222226;
+  --pollux-text:        #FFFFFF;
+  --pollux-text-muted:  #888888;
+
+  /* ── Material Surface System (from design system tokens) ── */
+  --surface:                    #131317;
+  --surface-dim:                #131317;
+  --surface-bright:             #39393d;
+  --surface-container-lowest:   #0e0e12;
+  --surface-container-low:      #1b1b1f;
+  --surface-container:          #1f1f23;
+  --surface-container-high:     #2a2a2e;
+  --surface-container-highest:  #353439;
+  --surface-variant:            #353439;
+  --surface-tint:               #ffb3b1;
+
+  /* ── On-Surface / Text ── */
+  --on-surface:         #e4e1e7;
+  --on-surface-variant: #e4bebc;
+  --on-background:      #e4e1e7;
+
+  /* ── Primary ── */
+  --primary:                #ffb3b1;
+  --on-primary:             #680011;
+  --primary-container:      #ff535b;
+  --on-primary-container:   #5b000e;
+  --inverse-primary:        #bb152c;
+  --primary-fixed:          #ffdad8;
+  --primary-fixed-dim:      #ffb3b1;
+  --on-primary-fixed:       #410007;
+
+  /* ── Secondary ── */
+  --secondary:              #c6c6c7;
+  --on-secondary:           #2f3131;
+  --secondary-container:    #454747;
+  --on-secondary-container: #b4b5b5;
+
+  /* ── Tertiary ── */
+  --tertiary:               #6fd8cc;
+  --on-tertiary:            #003733;
+  --tertiary-container:     #2fa096;
+  --on-tertiary-container:  #00302c;
+
+  /* ── Error ── */
+  --error:                  #ffb4ab;
+  --on-error:               #690005;
+  --error-container:        #93000a;
+  --on-error-container:     #ffdad6;
+
+  /* ── Outline ── */
+  --outline:                #ab8987;
+  --outline-variant:        #5b403f;
+
+  /* ── Inverse ── */
+  --inverse-surface:        #e4e1e7;
+  --inverse-on-surface:     #303034;
+
+  /* ── Typography ── */
+  --font-headline: "Space Grotesk", system-ui, sans-serif;
+  --font-body:     "Inter", system-ui, sans-serif;
+  --font-label:    "Space Grotesk", system-ui, sans-serif;
+
+  /* Logo type style */
+  --logo-size:     24px;
+  --logo-weight:   700;
+  --logo-leading:  100%;
+  --logo-tracking: 0.2em;
+
+  /* Headline Large */
+  --headline-lg-size:     48px;
+  --headline-lg-weight:   700;
+  --headline-lg-leading:  1.1;
+  --headline-lg-tracking: -0.02em;
+
+  /* Headline Medium */
+  --headline-md-size:     32px;
+  --headline-md-weight:   600;
+  --headline-md-leading:  1.2;
+  --headline-md-tracking: -0.01em;
+
+  /* Body Base */
+  --body-size:     16px;
+  --body-weight:   400;
+  --body-leading:  1.6;
+  --body-tracking: 0;
+
+  /* Label Mono */
+  --label-size:     12px;
+  --label-weight:   500;
+  --label-leading:  1.4;
+  --label-tracking: 0.05em;
+
+  /* ── Spacing (4px baseline grid) ── */
+  --space-unit: 4px;
+  --space-xs:   4px;
+  --space-sm:   8px;
+  --space-md:   16px;
+  --space-lg:   24px;
+  --space-xl:   48px;
+  --space-container-margin: 32px;
+  --space-gutter: 16px;
+
+  /* ── Shapes (Brutalist — 0px radius) ── */
+  --radius: 0px;
+}
