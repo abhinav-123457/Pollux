@@ -1,6 +1,7 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { trackPageView } from "../lib/firebase";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 /**
  * Shared layout matching the Stitch-generated HTML structure.
@@ -16,19 +17,25 @@ import { trackPageView } from "../lib/firebase";
 const NAV_LINKS = [
   { to: "/timeline", label: "TIMELINE", icon: "schedule" },
   { to: "/guide",    label: "GUIDE",    icon: "list_alt" },
+  { to: "/quiz",     label: "QUIZ",     icon: "quiz" },
+  { to: "/analytics", label: "ANALYTICS", icon: "analytics" },
 ] as const;
 
 const MOBILE_NAV = [
   { to: "/",          label: "Home",          icon: "home" },
   { to: "/timeline",  label: "Timeline",      icon: "schedule" },
   { to: "/guide",     label: "Guide",         icon: "list_alt" },
-  { to: "/assistant", label: "AI Assistant",   icon: "smart_toy" },
+  { to: "/quiz",      label: "Quiz",          icon: "quiz" },
+  { to: "/analytics", label: "Analytics",     icon: "analytics" },
+  { to: "/assistant", label: "AI Assistant",  icon: "smart_toy" },
 ] as const;
 
 const PAGE_TITLES: Record<string, string> = {
   "/":          "Home",
   "/timeline":  "Election Timeline",
   "/guide":     "Voter Guide",
+  "/quiz":      "Election Quiz",
+  "/analytics": "Analytics Dashboard",
   "/assistant": "AI Assistant",
 };
 
@@ -136,6 +143,9 @@ export default function Layout() {
           >
             Ask AI
           </Link>
+
+          {/* Language Switcher */}
+          <LanguageSwitcher />
         </div>
       </header>
 

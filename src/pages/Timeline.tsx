@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import Heading from "../components/Heading";
+import Badge from "../components/Badge";
 
 /**
  * POLLUX Election Timeline — converted from stitch-screens/code/2_POLLUX_Election_Timeline.html
  *
  * Vertical red timeline with 6 election phases.
  * Click any phase to expand 2-3 detail sentences. Hover adds red left border + bg lift.
+ * Enhanced with: reusable components, improved accessibility, keyboard navigation.
  */
 
 interface Phase {
@@ -16,78 +20,80 @@ interface Phase {
   details: string[];
 }
 
-const PHASES: Phase[] = [
-  {
-    num: 1,
-    title: "Election Announcement",
-    desc: "Election Commission sets dates, Model Code of Conduct begins",
-    week: "WEEK 1",
-    details: [
-      "The Election Commission of India (ECI) announces the schedule for upcoming elections, including key dates for nominations, voting, and counting.",
-      "The Model Code of Conduct (MCC) comes into effect immediately, restricting government announcements and new policy decisions.",
-      "Political parties begin strategizing and selecting candidates for their respective constituencies.",
-    ],
-  },
-  {
-    num: 2,
-    title: "Voter Registration Closes",
-    desc: "Final date to register on electoral rolls",
-    week: "WEEK 2",
-    details: [
-      "Citizens can verify their registration status on voters.eci.gov.in using their EPIC number or personal details.",
-      "New voter registrations and corrections to existing entries must be submitted before the deadline.",
-      "Special registration drives are conducted in remote areas to ensure maximum electoral participation.",
-    ],
-  },
-  {
-    num: 3,
-    title: "Candidate Nomination",
-    desc: "Parties file candidates, scrutiny and withdrawal period",
-    week: "WEEK 3-4",
-    details: [
-      "Candidates file nomination papers with the Returning Officer along with a security deposit and affidavit of assets.",
-      "Scrutiny of nominations takes place to verify eligibility, criminal records, and financial disclosures.",
-      "Candidates may withdraw their nominations up to 3 days after the scrutiny date.",
-    ],
-  },
-  {
-    num: 4,
-    title: "Campaign Period",
-    desc: "Rallies, manifesto releases, 48hr silence before polling",
-    week: "WEEK 5-6",
-    details: [
-      "Parties release manifestos outlining their governance agenda, social programs, and economic policies.",
-      "Campaigning must cease 48 hours before polling day — the 'silence period' — to allow voters to reflect.",
-      "The ECI monitors campaign spending and enforces limits per candidate as per the Representation of the People Act.",
-    ],
-  },
-  {
-    num: 5,
-    title: "Polling Day",
-    desc: "EVM voting, VVPAT verification, exit polls released after close",
-    week: "WEEK 7",
-    highlight: true,
-    details: [
-      "Voters authenticate their identity at polling booths and cast votes on Electronic Voting Machines (EVMs).",
-      "The Voter Verifiable Paper Audit Trail (VVPAT) prints a slip for each vote, providing a physical verification layer.",
-      "Exit polls are released after the last phase of voting concludes, offering early projections of results.",
-    ],
-  },
-  {
-    num: 6,
-    title: "Results & Formation",
-    desc: "Vote counting, winner declared, government formation begins",
-    week: "WEEK 8-10",
-    details: [
-      "Counting of votes happens simultaneously across all constituencies under strict security and observer supervision.",
-      "The party or coalition securing a majority of seats (272 in Lok Sabha) is invited by the President to form the government.",
-      "Elected representatives take the oath of office, and the new Council of Ministers is sworn in.",
-    ],
-  },
-];
-
 export default function Timeline() {
+  const { t } = useTranslation();
   const [expanded, setExpanded] = useState<number | null>(null);
+
+  // Build phases from translations
+  const PHASES: Phase[] = [
+    {
+      num: 1,
+      title: t('timeline.phases.announcement'),
+      desc: t('timeline.phases.announcementDesc'),
+      week: "WEEK 1",
+      details: [
+        "The Election Commission of India (ECI) announces the schedule for upcoming elections, including key dates for nominations, voting, and counting.",
+        "The Model Code of Conduct (MCC) comes into effect immediately, restricting government announcements and new policy decisions.",
+        "Political parties begin strategizing and selecting candidates for their respective constituencies.",
+      ],
+    },
+    {
+      num: 2,
+      title: t('timeline.phases.registration'),
+      desc: t('timeline.phases.registrationDesc'),
+      week: "WEEK 2",
+      details: [
+        "Citizens can verify their registration status on voters.eci.gov.in using their EPIC number or personal details.",
+        "New voter registrations and corrections to existing entries must be submitted before the deadline.",
+        "Special registration drives are conducted in remote areas to ensure maximum electoral participation.",
+      ],
+    },
+    {
+      num: 3,
+      title: t('timeline.phases.nomination'),
+      desc: t('timeline.phases.nominationDesc'),
+      week: "WEEK 3-4",
+      details: [
+        "Candidates file nomination papers with the Returning Officer along with a security deposit and affidavit of assets.",
+        "Scrutiny of nominations takes place to verify eligibility, criminal records, and financial disclosures.",
+        "Candidates may withdraw their nominations up to 3 days after the scrutiny date.",
+      ],
+    },
+    {
+      num: 4,
+      title: t('timeline.phases.campaign'),
+      desc: t('timeline.phases.campaignDesc'),
+      week: "WEEK 5-6",
+      details: [
+        "Parties release manifestos outlining their governance agenda, social programs, and economic policies.",
+        "Campaigning must cease 48 hours before polling day — the 'silence period' — to allow voters to reflect.",
+        "The ECI monitors campaign spending and enforces limits per candidate as per the Representation of the People Act.",
+      ],
+    },
+    {
+      num: 5,
+      title: t('timeline.phases.polling'),
+      desc: t('timeline.phases.pollingDesc'),
+      week: "WEEK 7",
+      highlight: true,
+      details: [
+        "Voters authenticate their identity at polling booths and cast votes on Electronic Voting Machines (EVMs).",
+        "The Voter Verifiable Paper Audit Trail (VVPAT) prints a slip for each vote, providing a physical verification layer.",
+        "Exit polls are released after the last phase of voting concludes, offering early projections of results.",
+      ],
+    },
+    {
+      num: 6,
+      title: t('timeline.phases.results'),
+      desc: t('timeline.phases.resultsDesc'),
+      week: "WEEK 8-10",
+      details: [
+        "Counting of votes happens simultaneously across all constituencies under strict security and observer supervision.",
+        "The party or coalition securing a majority of seats (272 in Lok Sabha) is invited by the President to form the government.",
+        "Elected representatives take the oath of office, and the new Council of Ministers are sworn in.",
+      ],
+    },
+  ];
 
   const toggle = (num: number) => {
     setExpanded((prev) => (prev === num ? null : num));
@@ -101,31 +107,10 @@ export default function Timeline() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
         {/* ═══════ Title Section ═══════ */}
         <div className="mb-12 md:mb-16">
-          <span
-            className="uppercase mb-4 block"
-            style={{
-              fontFamily: "var(--font-label)",
-              fontSize: "var(--label-size)",
-              fontWeight: "var(--label-weight)" as unknown as number,
-              letterSpacing: "var(--label-tracking)",
-              color: "var(--pollux-text-muted)",
-            }}
-          >
-            Election Process
-          </span>
-          <h1
-            className="uppercase whitespace-pre-line"
-            style={{
-              fontFamily: "var(--font-headline)",
-              fontSize: "clamp(32px, 5vw, var(--headline-lg-size))",
-              fontWeight: "var(--headline-lg-weight)" as unknown as number,
-              lineHeight: "var(--headline-lg-leading)",
-              letterSpacing: "var(--headline-lg-tracking)",
-              color: "var(--pollux-text)",
-            }}
-          >
-            {"From Announcement\nto Results."}
-          </h1>
+          <Badge variant="secondary">{t('timeline.title')}</Badge>
+          <Heading level={1} className="mt-4 mb-2">
+            {t('timeline.title')}
+          </Heading>
           <p
             className="mt-4 max-w-2xl"
             style={{
@@ -135,7 +120,7 @@ export default function Timeline() {
               color: "var(--pollux-text-muted)",
             }}
           >
-            Track every phase of a general election in sequence.
+            {t('timeline.subtitle')}
           </p>
         </div>
 

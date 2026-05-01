@@ -1,45 +1,7 @@
 import { useState, useRef, useEffect, type FormEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { askElectionQuestion } from "../lib/gemini";
-
-/**
- * Converts basic markdown from Gemini responses into safe HTML.
- * Handles: **bold**, *italic*, `code`, [links](url), and line breaks.
- *
- * Security:
- *  - HTML entities are escaped FIRST to neutralize raw HTML injection.
- *  - Links are validated against an allowlist of safe protocols.
- *  - Quotes are escaped to prevent attribute breakout.
- */
-const SAFE_PROTOCOLS = /^(https?:\/\/|mailto:)/i;
-
-function sanitizeUrl(url: string): string {
-  const decoded = url.replace(/&amp;/g, "&");
-  if (SAFE_PROTOCOLS.test(decoded)) return url;
-  return "#"; // block javascript:, data:, vbscript:, etc.
-}
-
-function renderMarkdown(text: string): string {
-  return text
-    // 1. Escape HTML entities (MUST be first)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    // 2. Bold: **text**
-    .replace(/\*\*(.+?)\*\*/g, '<strong style="color:var(--pollux-text);font-weight:700">$1</strong>')
-    // 3. Italic: *text* (not preceded/followed by *)
-    .replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, "<em>$1</em>")
-    // 4. Inline code: `text`
-    .replace(/`(.+?)`/g, '<code style="background:var(--surface-container);padding:2px 6px;font-size:0.85em">$1</code>')
-    // 5. Links: [text](url) — with protocol allowlist
-    .replace(
-      /\[(.+?)\]\((.+?)\)/g,
-      (_match, label: string, url: string) =>
-        `<a href="${sanitizeUrl(url)}" target="_blank" rel="noopener noreferrer" style="color:var(--pollux-red);text-decoration:underline">${label}</a>`
-    )
-    // 6. Line breaks
-    .replace(/\n/g, "<br/>");
-}
+import { renderMarkdown } from "../lib/markdown";
 
 /**
  * POLLUX AI Assistant — converted from stitch-screens/code/3_POLLUX_AI_Assistant.html
@@ -47,6 +9,12 @@ function renderMarkdown(text: string): string {
  * Sidebar with 4 suggested question pills.
  * Full chat UI: user bubbles (right, red), AI bubbles (left, bordered).
  * Wired to askElectionQuestion() from gemini.ts.
+ * 
+ * Features:
+ * - Real-time chat with Gemini AI
+ * - Suggested questions sidebar
+ * - Markdown rendering for rich responses
+ * - Loading states and error handling
  */
 
 interface Message {
@@ -54,19 +22,23 @@ interface Message {
   content: string;
 }
 
-const SUGGESTIONS = [
-  "When is the next Lok Sabha election?",
-  "How do I register to vote?",
-  "What is Model Code of Conduct?",
-  "How does EVM voting work?",
-];
-
 export default function AIAssistant() {
+  const { t, i18n } = useTranslation();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Get suggested questions from translations
+  const SUGGESTIONS: string[] = Array.isArray(t('ai.questions', { returnObjects: true }))
+    ? (t('ai.questions', { returnObjects: true }) as string[])
+    : [
+        "When is the next Lok Sabha election?",
+        "How do I register to vote?",
+        "What is Model Code of Conduct?",
+        "How does EVM voting work?",
+      ];
 
   // Auto-scroll on new messages
   useEffect(() => {
@@ -84,18 +56,20 @@ export default function AIAssistant() {
     setLoading(true);
 
     try {
-      const response = await askElectionQuestion(trimmed);
+      const response = await askElectionQuestion(trimmed, i18n.language);
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: response },
       ]);
-    } catch {
+    } catch (error) {
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : "Sorry, I couldn't get a response. Please try again in a moment.";
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content:
-            "Sorry, I couldn't get a response. Please try again in a moment.",
+          content: errorMessage,
         },
       ]);
     } finally {
@@ -230,7 +204,7 @@ export default function AIAssistant() {
 
       {/* ═══════ Main Chat Area ═══════ */}
       <main
-        className="flex-1 flex flex-col relative overflow-hidden"
+        className="flex-1 flex flex-col overflow-hidden"
         style={{ backgroundColor: "var(--pollux-bg)" }}
       >
         {/* ── Chat Header ── */}
@@ -275,13 +249,13 @@ export default function AIAssistant() {
               className="block w-2 h-2"
               style={{ backgroundColor: "var(--pollux-red)" }}
             />
-            Powered by Gemini
+            {t('ai.poweredBy')}
           </div>
         </div>
 
         {/* ── Scrollable Messages ── */}
         <div
-          className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 space-y-6 pb-40"
+          className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 space-y-6"
           role="log"
           aria-label="Chat messages"
           aria-live="polite"
@@ -475,10 +449,10 @@ export default function AIAssistant() {
 
         {/* ── Input Area ── */}
         <div
-          className="absolute bottom-0 left-0 right-0 p-4 sm:p-6"
+          className="shrink-0 p-4 sm:p-6 border-t"
           style={{
-            background:
-              "linear-gradient(to top, var(--pollux-bg) 60%, transparent)",
+            borderColor: "var(--pollux-border)",
+            backgroundColor: "var(--pollux-bg)",
           }}
         >
           <form
@@ -490,7 +464,7 @@ export default function AIAssistant() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask anything about elections..."
+              placeholder={t('ai.placeholder')}
               disabled={loading}
               aria-label="Type your election question"
               autoComplete="off"

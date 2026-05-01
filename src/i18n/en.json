@@ -1,0 +1,100 @@
+{
+  "common": {
+    "appName": "POLLUX",
+    "subtitle": "Indian Election Intelligence",
+    "language": "Language",
+    "english": "English",
+    "hindi": "हिन्दी",
+    "tamil": "தமிழ்",
+    "telugu": "తెలుగు",
+    "kannada": "ಕನ್ನಡ"
+  },
+  "nav": {
+    "home": "Home",
+    "timeline": "Timeline",
+    "guide": "Guide",
+    "quiz": "Quiz",
+    "aiAssistant": "AI Assistant"
+  },
+  "home": {
+    "title": "Indian Election Intelligence",
+    "subtitle": "Your guide to understanding elections, voting, and democracy",
+    "features": {
+      "timeline": "Election Timeline",
+      "timelineDesc": "Track the 6-phase election journey from announcement to results",
+      "guide": "Voter Guide",
+      "guideDesc": "Check eligibility and learn the voting process step-by-step",
+      "quiz": "Knowledge Quiz",
+      "quizDesc": "Test your election knowledge with interactive questions",
+      "ai": "AI Assistant",
+      "aiDesc": "Ask any election question powered by AI"
+    }
+  },
+  "timeline": {
+    "title": "Election Timeline",
+    "subtitle": "Track the election process through 6 phases",
+    "phases": {
+      "announcement": "Election Announcement",
+      "announcementDesc": "Election dates and schedule announced",
+      "registration": "Voter Registration",
+      "registrationDesc": "Register as a new voter or update details",
+      "nomination": "Nomination Filing",
+      "nominationDesc": "Candidates file nominations for constituencies",
+      "campaign": "Campaign Period",
+      "campaignDesc": "Political campaigning and voter engagement",
+      "polling": "Polling Day",
+      "pollingDesc": "Citizens cast their votes",
+      "results": "Results",
+      "resultsDesc": "Election results declared and analyzed"
+    }
+  },
+  "guide": {
+    "title": "Voter Guide",
+    "eligibility": "Eligibility Checklist",
+    "eligibilityItems": {
+      "citizen": "Indian Citizen",
+      "age": "18 years or older",
+      "resident": "Resident for 6+ months"
+    },
+    "pollingSteps": "Polling Day Steps",
+    "steps": {
+      "bring": "Bring valid ID proof",
+      "find": "Find your polling station",
+      "mark": "Mark your choice on EVM",
+      "verify": "Verify on VVPAT slip"
+    },
+    "moreInfo": "More Information at Voters.eci.gov.in"
+  },
+  "quiz": {
+    "title": "Election Knowledge Quiz",
+    "startQuiz": "Start Quiz",
+    "question": "Question",
+    "selectAnswer": "Select the correct answer",
+    "next": "Next",
+    "complete": "Quiz Complete",
+    "score": "You scored",
+    "outOf": "out of",
+    "correct": "Your got",
+    "excellent": "Excellent! You're an election expert!",
+    "good": "Great job! You know elections well!",
+    "fair": "Not bad! Keep learning about elections.",
+    "poor": "Keep exploring our guide to learn more!"
+  },
+  "ai": {
+    "title": "AI Assistant",
+    "subtitle": "Ask any question about Indian elections",
+    "suggestedQuestions": "Suggested Questions",
+    "questions": [
+      "When is the next Lok Sabha election?",
+      "How do I register to vote?",
+      "What is Model Code of Conduct?",
+      "How does EVM voting work?"
+    ],
+    "placeholder": "Ask anything about elections...",
+    "send": "Send",
+    "loading": "AI is thinking...",
+    "disclaimer": "AI responses may contain inaccuracies. Verify official data.",
+    "poweredBy": "Powered by Gemini",
+    "newAnalysis": "New Analysis"
+  }
+}

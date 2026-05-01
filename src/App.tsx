@@ -8,6 +8,8 @@ const Home = lazy(() => import("./pages/Home"));
 const Timeline = lazy(() => import("./pages/Timeline"));
 const Guide = lazy(() => import("./pages/Guide"));
 const AIAssistant = lazy(() => import("./pages/AIAssistant"));
+const Quiz = lazy(() => import("./pages/Quiz"));
+const Analytics = lazy(() => import("./pages/Analytics"));
 
 /** Loading fallback shown while a page chunk is downloading */
 function PageLoader() {
@@ -65,6 +67,8 @@ export default function App() {
               <Route path="/timeline" element={<Timeline />} />
               <Route path="/guide" element={<Guide />} />
               <Route path="/assistant" element={<AIAssistant />} />
+              <Route path="/quiz" element={<Quiz />} />
+              <Route path="/analytics" element={<Analytics />} />
             </Route>
           </Routes>
         </Suspense>

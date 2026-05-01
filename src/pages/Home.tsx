@@ -25,12 +25,28 @@ const FEATURES = [
     desc: "Step by step process",
   },
   {
+    to: "/quiz",
+    tag: "Interactive",
+    tagColor: "var(--pollux-red)",
+    icon: "quiz",
+    title: "Knowledge Quiz",
+    desc: "Test your election knowledge",
+  },
+  {
     to: "/assistant",
     tag: "AI Powered",
     tagColor: "var(--pollux-red)",
     icon: "chat",
     title: "AI Assistant",
     desc: "Ask anything, get instant answers",
+  },
+  {
+    to: "/analytics",
+    tag: "Insights",
+    tagColor: "var(--pollux-red)",
+    icon: "analytics",
+    title: "Analytics Dashboard",
+    desc: "Real-time engagement metrics",
   },
 ] as const;
 
@@ -123,7 +139,7 @@ export default function Home() {
       </section>
 
       {/* ═══════ Features Bento Grid ═══════ */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-24">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full mb-24">
         {FEATURES.map((card) => (
           <Link
             key={card.to}
