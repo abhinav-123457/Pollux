@@ -5,7 +5,7 @@ import {
 
 // Mock Firebase tracking
 vi.mock('./firebase', () => ({
-  trackEvent: vi.fn().mockImplementation((eventType, data) => {
+  trackEvent: vi.fn().mockImplementation(() => {
     // Just return undefined (simulating Firebase trackEvent)
     return undefined;
   }),

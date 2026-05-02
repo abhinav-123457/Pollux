@@ -1,13 +1,4 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import {
-  getCandidatesByConstituency,
-  getTopCandidates,
-  getConstituency,
-  getConstituenciesByState,
-  getElectionResults,
-  getCandidateProfile,
-  getElectionStats,
-} from './firestoreElections';
 
 // Mock Firebase
 vi.mock('./firebase', () => ({

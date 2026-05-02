@@ -1,12 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import {
-  signInAsGuest,
-  signInWithEmail,
-  createAccount,
-  signOutUser,
-  getCurrentUser,
-  isAuthenticated,
-} from './auth';
+import type { Auth } from 'firebase/auth';
 
 // Mock Firebase Auth
 vi.mock('firebase/auth', () => ({
@@ -39,7 +32,7 @@ describe('Firebase Authentication', () => {
           metadata: {},
           displayName: 'Guest User',
         },
-      } as any);
+      } as unknown as Awaited<ReturnType<typeof signInAnonymously>>);
 
       const result = await signInAnonymously();
       expect(result.user.isAnonymous).toBe(true);
@@ -57,10 +50,10 @@ describe('Firebase Authentication', () => {
           email: 'test@example.com',
           isAnonymous: false,
         },
-      } as any);
+      } as unknown as Awaited<ReturnType<typeof signInWithEmailAndPassword>>);
 
       const result = await signInWithEmailAndPassword(
-        {} as any,
+        {} as unknown as Auth,
         'test@example.com',
         'password123'
       );
@@ -76,7 +69,7 @@ describe('Firebase Authentication', () => {
       vi.mocked(signInWithEmailAndPassword).mockRejectedValueOnce(error);
 
       await expect(
-        signInWithEmailAndPassword({} as any, 'test@example.com', 'wrong')
+        signInWithEmailAndPassword({} as unknown as Auth, 'test@example.com', 'wrong')
       ).rejects.toThrow('Invalid credentials');
     });
   });
@@ -91,10 +84,10 @@ describe('Firebase Authentication', () => {
           email: 'newuser@example.com',
           isAnonymous: false,
         },
-      } as any);
+      } as unknown as Awaited<ReturnType<typeof createUserWithEmailAndPassword>>);
 
       const result = await createUserWithEmailAndPassword(
-        {} as any,
+        {} as unknown as Auth,
         'newuser@example.com',
         'password123'
       );
@@ -110,7 +103,7 @@ describe('Firebase Authentication', () => {
       
       vi.mocked(signOut).mockResolvedValueOnce(undefined);
 
-      await expect(signOut({} as any)).resolves.toBeUndefined();
+      await expect(signOut({} as unknown as Auth)).resolves.toBeUndefined();
     });
   });
 

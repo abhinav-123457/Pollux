@@ -1,11 +1,4 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import type { DocumentSnapshot } from 'firebase/firestore';
-import {
-  getPageViewEvents,
-  getQuizEvents,
-  getAIQuestionEvents,
-  aggregateDailyStats,
-} from './firebaseAnalytics';
 
 // Mock Firebase
 vi.mock('./firebase', () => ({
@@ -46,7 +39,7 @@ describe('firebaseAnalytics', () => {
 
       vi.mocked(getDocs).mockResolvedValueOnce({
         docs: mockEvents,
-      } as any);
+      } as unknown as Awaited<ReturnType<typeof getDocs>>);
 
       // This would be called from Firebase, mocking the behavior
       expect(mockEvents).toHaveLength(1);
