@@ -1,4 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
+import { trackError } from "../lib/analyticsTracking";
 
 interface Props {
   children: ReactNode;
@@ -26,6 +27,8 @@ export default class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, info: ErrorInfo): void {
     console.error("[POLLUX] Uncaught error:", error, info.componentStack);
+    // Track error in Firebase
+    trackError(error.name || "UnknownError", error.message, info.componentStack || "");
   }
 
   render(): ReactNode {

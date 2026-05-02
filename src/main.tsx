@@ -3,6 +3,11 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import "./i18n/config";
+import { trackDeviceInfo, trackPageView } from "./lib/analyticsTracking";
+
+// Track device info on load
+trackDeviceInfo();
+trackPageView("/", "Home");
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
