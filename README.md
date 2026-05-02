@@ -10,7 +10,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss)
 ![Firebase](https://img.shields.io/badge/Firebase-Analytics-orange?logo=firebase)
 ![Gemini](https://img.shields.io/badge/Gemini_AI-2.0_Flash-green?logo=google)
-![Tests](https://img.shields.io/badge/Tests-38%2F38-brightgreen)
+![Tests](https://img.shields.io/badge/Tests-79%2F79-brightgreen)
 ![Offline](https://img.shields.io/badge/Offline-Supported-blueviolet)
 ![Languages](https://img.shields.io/badge/Languages-10%2B-yellow)
 
@@ -249,6 +249,7 @@ Responsive breakpoints: **320px** (mobile) → **768px** (tablet) → **1024px**
 
 | Suite | Tests | Covers |
 |-------|-------|--------|
+| `App.integration.test.tsx` | 2 | Route rendering, title updates, language switching, landmarks |
 | `lib/markdown.test.ts` | 6 | HTML rendering, URL sanitization, XSS prevention |
 | `lib/quiz.test.ts` | 8 | Score calculation, question randomization, edge cases |
 | `components/Card.test.tsx` | 5 | Interactive behavior, ARIA attributes |

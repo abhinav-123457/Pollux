@@ -14,13 +14,19 @@ const LANGUAGES = [
 ];
 
 export default function LanguageSwitcher() {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   return (
     <div className="flex items-center gap-2">
+      <label htmlFor="language-switcher" className="sr-only">
+        {t('common.language')}
+      </label>
       <select
+        id="language-switcher"
         value={i18n.language}
         onChange={(e) => i18n.changeLanguage(e.target.value)}
+        aria-label={t('common.language')}
+        title={t('common.language')}
         className="px-3 py-2 rounded transition-colors"
         style={{
           backgroundColor: 'var(--pollux-border)',
