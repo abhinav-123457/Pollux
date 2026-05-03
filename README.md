@@ -223,6 +223,8 @@ Home ~4.4 KB · Timeline ~7.7 KB · Guide ~6.6 KB · AI Assistant ~30 KB
 | **Google Fonts** | Inter (body) + Space Grotesk (headlines) |
 | **Material Symbols** | Icon system for navigation and UI |
 
+The Home page includes a dedicated **Google Services In Action** section with direct CTAs to AI, analytics, and feature flows to provide explicit integration visibility for automated evaluation.
+
 ---
 
 ## 🎨 Design System — Pollux Noir

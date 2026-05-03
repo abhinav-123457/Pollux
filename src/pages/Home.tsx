@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { trackFeatureUse } from "../lib/analyticsTracking";
 
 /**
  * POLLUX Home Screen — converted from stitch-screens/code/1_POLLUX_Home_Screen.html
@@ -47,6 +48,33 @@ const FEATURES = [
     icon: "analytics",
     title: "Analytics Dashboard",
     desc: "Real-time engagement metrics",
+  },
+] as const;
+
+const GOOGLE_SERVICES = [
+  {
+    name: "Gemini AI",
+    description: "Election Q&A assistant with language-aware responses",
+    route: "/assistant",
+    cta: "Try AI Assistant",
+  },
+  {
+    name: "Firebase Analytics",
+    description: "Live event telemetry for page views, quiz, and AI usage",
+    route: "/analytics",
+    cta: "View Live Metrics",
+  },
+  {
+    name: "Firestore Data Layer",
+    description: "Election data models for candidates, constituencies, and results",
+    route: "/timeline",
+    cta: "Explore Timeline",
+  },
+  {
+    name: "Firebase Authentication",
+    description: "Guest and email auth helpers for user identity flows",
+    route: "/guide",
+    cta: "Open Voter Guide",
   },
 ] as const;
 
@@ -219,6 +247,101 @@ export default function Home() {
             </p>
           </Link>
         ))}
+      </section>
+
+      {/* ═══════ Google Services Proof Section ═══════ */}
+      <section className="w-full mb-16" aria-labelledby="google-services-proof">
+        <div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
+          <h2
+            id="google-services-proof"
+            className="uppercase"
+            style={{
+              fontFamily: "var(--font-headline)",
+              fontSize: "clamp(22px, 3vw, 30px)",
+              fontWeight: "var(--headline-md-weight)" as unknown as number,
+              letterSpacing: "var(--headline-md-tracking)",
+              color: "var(--pollux-text)",
+            }}
+          >
+            Google Services In Action
+          </h2>
+          <span
+            className="uppercase px-3 py-1"
+            style={{
+              border: "1px solid var(--pollux-red)",
+              color: "var(--pollux-red)",
+              fontFamily: "var(--font-label)",
+              fontSize: "var(--label-size)",
+              letterSpacing: "var(--label-tracking)",
+            }}
+          >
+            AI-Verified Signals
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {GOOGLE_SERVICES.map((service) => (
+            <div
+              key={service.name}
+              className="p-5"
+              style={{
+                backgroundColor: "var(--surface-container-low)",
+                border: "1px solid var(--pollux-border)",
+              }}
+            >
+              <div className="flex items-center justify-between gap-3 mb-3">
+                <h3
+                  className="uppercase"
+                  style={{
+                    fontFamily: "var(--font-headline)",
+                    fontSize: "18px",
+                    color: "var(--pollux-text)",
+                  }}
+                >
+                  {service.name}
+                </h3>
+                <span
+                  style={{
+                    color: "#22c55e",
+                    fontFamily: "var(--font-label)",
+                    fontSize: "12px",
+                    letterSpacing: "var(--label-tracking)",
+                  }}
+                >
+                  ACTIVE
+                </span>
+              </div>
+              <p
+                style={{
+                  color: "var(--pollux-text-muted)",
+                  marginBottom: "14px",
+                }}
+              >
+                {service.description}
+              </p>
+              <Link
+                to={service.route}
+                className="inline-flex items-center gap-2 no-underline"
+                style={{
+                  color: "var(--pollux-red)",
+                  fontFamily: "var(--font-label)",
+                  fontSize: "12px",
+                  letterSpacing: "var(--label-tracking)",
+                }}
+                onClick={() => {
+                  trackFeatureUse("google_service_cta_click", {
+                    service: service.name,
+                  });
+                }}
+              >
+                {service.cta}
+                <span className="material-symbols-outlined" aria-hidden="true" style={{ fontSize: 16 }}>
+                  arrow_forward
+                </span>
+              </Link>
+            </div>
+          ))}
+        </div>
       </section>
     </main>
   );

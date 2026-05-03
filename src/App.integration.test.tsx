@@ -53,7 +53,10 @@ describe('App integration', () => {
     expect(
       await screen.findByRole('heading', { name: 'Understand Every Vote.' })
     ).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Explore Timeline' })).toBeInTheDocument();
+    expect((await screen.findAllByRole('link', { name: 'Explore Timeline' })).length).toBeGreaterThan(0);
+    expect(
+      await screen.findByRole('heading', { name: /google services in action/i })
+    ).toBeInTheDocument();
   });
 
   it('includes quick access to AI assistant from layout actions', async () => {
