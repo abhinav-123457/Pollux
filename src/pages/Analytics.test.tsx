@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Analytics from './Analytics';
 import '../i18n/config';

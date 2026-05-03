@@ -35,7 +35,6 @@ export async function retryWithBackoff<T>(
       // Calculate exponential backoff with full jitter
       const exp = Math.min(maxDelayMs, minDelayMs * Math.pow(factor, attempt));
       const delay = Math.floor(Math.random() * exp);
-      // eslint-disable-next-line no-await-in-loop
       await sleep(delay);
     }
   }
