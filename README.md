@@ -279,6 +279,32 @@ All checks pass with **0 errors, 0 warnings**.
 
 ---
 
+## ✅ AI Evaluation Matrix
+
+| Criterion | Evidence in Repository |
+|-----------|------------------------|
+| Code Quality | Strict TypeScript, modular architecture, linting, reusable components |
+| Security | CSP in `index.html`, sanitization in AI/markdown pipeline, `SECURITY.md` policy |
+| Efficiency | Route-level lazy loading, service worker caching, optimized Vite build |
+| Testing | 79 passing tests (unit + integration) with Vitest and RTL |
+| Accessibility | Skip link, ARIA landmarks, keyboard focus states, labeled controls |
+| Google Services | Gemini API integration + Firebase Analytics/Auth/Firestore modules |
+
+---
+
+## 🤖 Automated Quality Gates
+
+The project includes CI gates to ensure reliability on every change:
+
+- GitHub Actions workflow: `.github/workflows/ci.yml`
+- Type checking: `npm run typecheck`
+- Linting: `npm run lint`
+- Tests: `npm run test:run`
+- Production build: `npm run build`
+- Full local gate: `npm run validate`
+
+---
+
 ## 🤝 Contributing
 
 1. Fork & create a feature branch

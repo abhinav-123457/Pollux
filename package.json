@@ -6,10 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "typecheck": "tsc -b --pretty false",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
-    "test:ui": "vitest --ui"
+    "test:run": "vitest --run",
+    "test:coverage": "vitest --run --coverage",
+    "test:ui": "vitest --ui",
+    "validate": "npm run typecheck && npm run lint && npm run test:run && npm run build"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
