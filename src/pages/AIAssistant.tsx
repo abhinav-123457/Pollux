@@ -62,14 +62,24 @@ export default function AIAssistant() {
         { role: "assistant", content: response },
       ]);
     } catch (error) {
-      const errorMessage = error instanceof Error 
-        ? error.message 
-        : "Sorry, I couldn't get a response. Please try again in a moment.";
+      // Enhanced error message with retry indication
+      let errorMessage = "Sorry, the AI is currently processing a high load.";
+      if (error instanceof Error) {
+        if (error.message.includes("rate limit")) {
+          errorMessage = "The service is receiving many requests. Retrying with backoff in a moment...";
+        } else if (error.message.includes("timeout")) {
+          errorMessage = "Request timed out. Our servers are retrying automatically. Please wait.";
+        } else if (error.message.includes("Too many requests")) {
+          errorMessage = "Too many rapid requests detected. Backing off for a moment before retry...";
+        } else {
+          errorMessage = error.message;
+        }
+      }
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: errorMessage,
+          content: `⚠️ ${errorMessage}\n\nIf this persists, try refreshing the page or ask a different question.`,
         },
       ]);
     } finally {

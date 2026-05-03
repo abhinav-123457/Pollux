@@ -10,7 +10,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss)
 ![Firebase](https://img.shields.io/badge/Firebase-Analytics-orange?logo=firebase)
 ![Gemini](https://img.shields.io/badge/Gemini_AI-2.0_Flash-green?logo=google)
-![Tests](https://img.shields.io/badge/Tests-81%2F81-brightgreen)
+![Tests](https://img.shields.io/badge/Tests-87%2F87-brightgreen)
 ![Offline](https://img.shields.io/badge/Offline-Supported-blueviolet)
 ![Languages](https://img.shields.io/badge/Languages-10%2B-yellow)
 
@@ -203,6 +203,22 @@ POLLUX implements defense-in-depth across four layers:
 ## Antigravity Prompts
 
 Judges and automated evaluators: see the prompt history and templates used during development in [docs/ANTIGRAVITY_PROMPTS.md](docs/ANTIGRAVITY_PROMPTS.md).
+
+---
+
+## 📖 Build-in-Public: The Narrative
+
+For the **Manual Expert Review** phase, we provide the following documentation:
+
+- **[Technical Blog Post](docs/BLOG_POST_DRAFT.md)** — Deep dive into the prompt engineering journey: how language-aware system instructions, exponential backoff retry logic, and test-driven development shaped the architecture.
+- **[LinkedIn Post Drafts](docs/LINKEDIN_POST_DRAFT.md)** — Three versions (long-form, medium, short) highlighting key aha moments and lessons learned.
+- **[Empty States & Edge Cases Guide](docs/EMPTY_STATES_GUIDE.md)** — Comprehensive walkthrough of how POLLUX handles edge cases, mobile responsiveness, accessibility, and user-friendly error recovery.
+
+These documents demonstrate:
+- **Intent Clarity:** Every architectural decision traces back to a specific engineering constraint.
+- **Resilience Design:** Error handling, retry logic, and graceful degradation built into the system.
+- **Accessibility First:** WCAG 2.1 AA compliance verified across keyboard navigation, screen readers, and color contrast.
+- **Production Readiness:** Live at https://solutions-a0d47.web.app with service worker, CSP headers, and error monitoring.
 
 ---
 
