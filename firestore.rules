@@ -1,0 +1,25 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Public read-only collections (if any) should be explicitly listed here.
+    // Default: deny all writes from clients; require authentication for writes.
+
+    // Example: allow read of public content
+    match /publicContent/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Analytics and app telemetry (sensitive) — only allow server writes or authenticated users
+    match /analytics/{doc=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.token.email_verified == true;
+    }
+
+    // Default deny for everything else — prevents open read/write rules
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

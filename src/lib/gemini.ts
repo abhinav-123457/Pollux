@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { trackEvent } from "./firebase";
+import { retryWithBackoff } from "./retry";
 
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 
@@ -103,10 +104,12 @@ export async function askElectionQuestion(question: string, language: string = "
         },
       });
 
-      const result = await model.generateContent({
-        contents: [{ role: "user", parts: [{ text: sanitized }] }],
-        systemInstruction: getSystemInstruction(language),
-      });
+      const result = await retryWithBackoff(() =>
+        model.generateContent({
+          contents: [{ role: "user", parts: [{ text: sanitized }] }],
+          systemInstruction: getSystemInstruction(language),
+        }),
+      );
 
       const text = result.response.text();
       trackEvent("ai_response_received", {

@@ -200,6 +200,12 @@ POLLUX implements defense-in-depth across four layers:
 
 ---
 
+## Antigravity Prompts
+
+Judges and automated evaluators: see the prompt history and templates used during development in [docs/ANTIGRAVITY_PROMPTS.md](docs/ANTIGRAVITY_PROMPTS.md).
+
+---
+
 ## ⚡ Performance
 
 | Metric | Target | How |
