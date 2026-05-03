@@ -45,4 +45,22 @@ describe('App integration', () => {
     ).toBeInTheDocument();
     expect(screen.getByRole('contentinfo')).toBeInTheDocument();
   });
+
+  it('renders home hero content when route is /', async () => {
+    window.history.pushState({}, '', '/');
+    render(<App />);
+
+    expect(
+      await screen.findByRole('heading', { name: 'Understand Every Vote.' })
+    ).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Explore Timeline' })).toBeInTheDocument();
+  });
+
+  it('includes quick access to AI assistant from layout actions', async () => {
+    render(<App />);
+
+    expect(
+      await screen.findByRole('link', { name: 'Open AI Assistant' })
+    ).toBeInTheDocument();
+  });
 });
